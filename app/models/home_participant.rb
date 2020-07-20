@@ -1,0 +1,2 @@
+class HomeParticipant < Participant
+end

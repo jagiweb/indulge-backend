@@ -1,0 +1,2 @@
+class VisitorParticipant < Participant
+end
