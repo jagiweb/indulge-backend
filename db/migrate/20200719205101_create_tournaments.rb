@@ -5,7 +5,7 @@ class CreateTournaments < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :country
       t.string :city
-      t.integer :type
+      t.string :types
 
       t.timestamps
     end

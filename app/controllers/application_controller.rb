@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
     token = request.headers["Authorization"]
     # Attempt to decode the token we've been given using our secret and return the decoded information, which will be a hash containing the user's id
     begin
-      JWT.decode(token, secret).first
+      JWT.decode(token, "secret").first
     # If an error is thrown because the token is invalid, we return an empty hash instead
     rescue
       {}

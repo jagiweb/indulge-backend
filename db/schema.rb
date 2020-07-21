@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_210010) do
     t.integer "goals"
     t.integer "yellow_cards"
     t.integer "red_cards"
-    t.integer "status"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_210010) do
     t.string "name"
     t.string "country"
     t.string "city"
-    t.integer "type"
+    t.string "types"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tournaments_on_user_id"

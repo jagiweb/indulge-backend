@@ -4,7 +4,7 @@ class CreateParticipants < ActiveRecord::Migration[6.0]
       t.integer :goals
       t.integer :yellow_cards
       t.integer :red_cards
-      t.integer :status
+      t.string :status
 
       t.timestamps
     end
