@@ -1,2 +1,4 @@
-class VisitorParticipant < Participant
+class VisitorParticipant < ApplicationRecord
+    has_one :match
+    has_one :team
 end

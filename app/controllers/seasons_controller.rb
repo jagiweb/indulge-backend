@@ -3,7 +3,7 @@ class SeasonsController < ApplicationController
     def get_season
         season = Season.find_by(id: params[:id])
         if season
-            render json: {season: season, matches: season.matches}
+            render json: {id: season.id, data: season, name: season.name, end_date: season.end_date, start_date: season.start_date, matches: season.matches, teams: season.teams}
         else
             render json: {message: "Invalid"}
         end
@@ -13,7 +13,7 @@ class SeasonsController < ApplicationController
         season = Season.new(season_params)
         if season.valid?
             season.save
-            render json: {season: season}
+            render json: {id: season.id, data: season, name: season.name, end_date: season.end_date, start_date: season.start_date, matches: season.matches, teams: season.teams}
         else
             render json: {message: "invalid"}
         end

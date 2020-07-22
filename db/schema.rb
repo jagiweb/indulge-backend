@@ -10,33 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_210010) do
+ActiveRecord::Schema.define(version: 2020_07_22_103721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "home_participants", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "matches", force: :cascade do |t|
-    t.bigint "season_id", null: false
-    t.string "start_date"
-    t.string "end_date"
-    t.string "stadium"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["season_id"], name: "index_matches_on_season_id"
-  end
-
-  create_table "participants", force: :cascade do |t|
     t.integer "goals"
     t.integer "yellow_cards"
     t.integer "red_cards"
+    t.bigint "team_id", null: false
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_home_participants_on_team_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "start_date"
+    t.string "end_date"
+    t.string "stadium"
+    t.bigint "season_id", null: false
+    t.bigint "home_participant_id", null: false
+    t.bigint "visitor_participant_id", null: false
+    t.index ["home_participant_id"], name: "index_matches_on_home_participant_id"
+    t.index ["season_id"], name: "index_matches_on_season_id"
+    t.index ["visitor_participant_id"], name: "index_matches_on_visitor_participant_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -81,12 +80,22 @@ ActiveRecord::Schema.define(version: 2020_07_19_210010) do
   end
 
   create_table "visitor_participants", force: :cascade do |t|
+    t.integer "goals"
+    t.integer "yellow_cards"
+    t.integer "red_cards"
+    t.bigint "team_id", null: false
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_visitor_participants_on_team_id"
   end
 
+  add_foreign_key "home_participants", "teams"
+  add_foreign_key "matches", "home_participants"
   add_foreign_key "matches", "seasons"
+  add_foreign_key "matches", "visitor_participants"
   add_foreign_key "seasons", "tournaments"
   add_foreign_key "teams", "seasons"
   add_foreign_key "tournaments", "users"
+  add_foreign_key "visitor_participants", "teams"
 end
